@@ -1,15 +1,3 @@
 {
-    "bol": {
-        "username": "gAAAAABm7hLJlwsV85BbyVX89Cq2h_a3XpsHgLc7EjQbCfrY_uYIoyFScRyVBomitLQx2TqxrPBnJOhxZ_c8Z46hIytqHwwvcQ==",
-        "password": "gAAAAABm7hLJiuL73g0BRRJNOeiNXqmWjJhSOvJlRVEPhd7J8P2yLIi3rP3PJzacTHgMVJ1Kxq-RYT-pTZqW27MWbN2Tb0HgVg=="
-    },
-    "salt": "DTomOR3rUM6XNl2Zc0ra4g==",
-    "facebook": {
-        "username": "gAAAAABm7hM_Jxr2j6swfTQ8Rbh2RC3io21-y6W_bzXJ2UUB7SpyPKQGZiLodUZDPaTwDwgEu-XCap4yn3nBSzAq0AOcNuEsHQ5vHEziBGl91vCGKtO3yUs=",
-        "password": "gAAAAABm7hM_GYt0dguyB7mfKXR89EF8fOZ4KLDg2x9_rPb4mZGT1Qub1q74htP_upDdCD1LCzZhXr0cy05DFizyKCW6S4DSP4UsrCAbypWYVEJJszysbuA="
-    },
-    "2go": {
-        "username": "gAAAAABm7hT5A5ObY8G_yL9jAB47gOIIqIPIkibO5-kUauIDEdVuHHQLZ3YrHPUZl30zycB35hOoHyBljGJU4GFO3-7doe304A==",
-        "password": "gAAAAABm7hT55CRyQcZVfGVUN1qrgqJqJSpbBxt2mMRk_N7H0gNuYP9tqPVGKowEhjNKriqioBYCGrV_ww0SZvN6Mkpxcs01RQ=="
-    }
+    
 }

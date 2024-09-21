@@ -98,26 +98,7 @@ def add_values():
                 json_data = {}
 
             # Encrypt the data
-            master_password = "your_master_password_here"  # You should get this securely from the user
-            key, salt = generate_key(master_password)
-
-            new_entry = {
-                "username": encrypt_string(user, key),
-                "password": encrypt_string(passw, key)
-            }
-
-            json_data[site] = new_entry
-            json_data['salt'] = base64.b64encode(salt).decode()
-
-            with open("data.json", mode="w") as data:
-                json.dump(json_data, data, indent=4)
-
-            website_text.delete(0, END)
-            user_text.delete(0, END)
-            pass_text.delete(0, END)
-
-            # Encrypt the data
-            master_password = "your_master_password_here"  # You should get this securely from the user
+            master_password = "abdlmaliq"  # You should get this securely from the user
             key, salt = generate_key(master_password)
 
             new_entry = {
@@ -144,7 +125,7 @@ def search_site():
             json_data = json.load(data)
 
         if site1 in json_data:
-            master_password = "your_master_password_here"  # You should get this securely from the user
+            master_password = "abdlmaliq"  # You should get this securely from the user
             salt = base64.b64decode(json_data['salt'])
             key, _ = generate_key(master_password, salt)
 

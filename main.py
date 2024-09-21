@@ -78,6 +78,10 @@ photo_img = PhotoImage(file="logo.png")
 canvas.create_image(100, 100, image=photo_img)
 canvas.grid(column=1, row=0)
 
+# Encrypt the data
+master_password = "your_master_password_here"  # You should get this securely from the user
+key, salt = generate_key(master_password)
+
 
 def add_values():
     site = website_text.get()
@@ -96,18 +100,15 @@ def add_values():
                     json_data = json.load(data)
             except FileNotFoundError:
                 json_data = {}
-
-            # Encrypt the data
-            master_password = "abdlmaliq"  # You should get this securely from the user
-            key, salt = generate_key(master_password)
-
             new_entry = {
                 "username": encrypt_string(user, key),
-                "password": encrypt_string(passw, key)
+                "password": encrypt_string(passw, key),
+                "salt": base64.b64encode(salt).decode()
             }
 
             json_data[site] = new_entry
-            json_data['salt'] = base64.b64encode(salt).decode()
+
+
 
             with open("data.json", mode="w") as data:
                 json.dump(json_data, data, indent=4)
@@ -115,6 +116,7 @@ def add_values():
             website_text.delete(0, END)
             user_text.delete(0, END)
             pass_text.delete(0, END)
+
 
 
 # Modify your search_site function
@@ -125,21 +127,27 @@ def search_site():
             json_data = json.load(data)
 
         if site1 in json_data:
-            master_password = "abdlmaliq"  # You should get this securely from the user
-            salt = base64.b64decode(json_data['salt'])
-            key, _ = generate_key(master_password, salt)
+            salt2 = base64.b64decode(json_data[site1]["salt"])
+            key2, _ = generate_key(master_password, salt2)
 
-            username = decrypt_string(json_data[site1]["username"], key)
-            password = decrypt_string(json_data[site1]["password"], key)
+            try:
+                username = decrypt_string(json_data[site1]["username"], key2)
+                password = decrypt_string(json_data[site1]["password"], key2)
 
-            messagebox.showinfo(title=f"Details for {site1}", message=f"Username: {username}\n"
-                                                                      f"Password: {password}")
+                messagebox.showinfo(title=f"Details for {site1}", message=f"Username: {username}\n"
+                                                                          f"Password: {password}")
+            except KeyError as ke:
+                messagebox.showerror(title="Error", message=f"Missing data for {site1}: {str(ke)}")
+            except ValueError as ve:
+                messagebox.showerror(title="Error", message=f"Decryption error: {str(ve)}")
         else:
             messagebox.showinfo(title="Alert", message="No such record in the database")
     except FileNotFoundError:
         messagebox.showinfo(title="Alert", message="No data file found")
+    except json.JSONDecodeError:
+        messagebox.showerror(title="Error", message="Invalid JSON data in the file")
     except Exception as e:
-        messagebox.showerror(title="Error", message=f"An error occurred: {str(e)}")
+        messagebox.showerror(title="Error", message=f"An unexpected error occurred: {str(e)}")
 
 
 website_label = Label(text="Website: ", )
